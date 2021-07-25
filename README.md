@@ -16,9 +16,7 @@ Criação de um sistema e-commerce para inventário de produtos e dados de clien
 - HTML
 - CSS
 - JavaScript
-- framework bootstrap 5
-
-### Funcionalidades:
+- Framework bootstrap 5
 
 #### Cadastro de clientes:
 

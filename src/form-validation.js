@@ -45,11 +45,11 @@ function cadastrarProduto(nomeP, codigoP, quantidadeP) {
       }
       produtos.push(novoProduto); // Adiciona um novo produto
       localStorage.setItem("produtos", JSON.stringify(produtos))
-      alert("Foram cadastradas com sucesso "+quantidadeP+ " unidades do produto "+nomeP+"!")
+      alert("Foram cadastradas "+quantidadeP+ " unidades do produto "+nomeP+"!")
       atualizarEstoque("estoque");
       location.reload();
   } else {
-      alert("A versão do seu navegador é muito antiga. Não foi possível executar a aplicação.")
+      alert("A versão do seu navegador não suporta o script. Não foi possível executar a aplicação.")
   }
 }
 
@@ -65,24 +65,37 @@ function carregarEstoque(campo) {
       }
       document.getElementById(campo).innerHTML = totalEstoque;
   } else {
-      alert("A versão do seu navegador é muito antiga. Não foi possível executar a aplicação.")
+      alert("A versão do seu navegador não suporta o script. Não foi possível executar a aplicação.")
   }
 }
 
 function listarEstoque() {
+  let containerProduct = document.querySelector('.row ul');
+  let containerProductTitle = document.querySelector('.row div h4');
   if ( typeof(Storage) !== "undefined" ) {
       let produtos = localStorage.getItem("produtos");
-      document.write("<h1>Estoque:</h1>")
+      containerProductTitle.insertAdjacentHTML(
+        'beforeEnd',
+        `<span class="text-primary">ESTOQUE</span>`
+        );
       if (produtos == null) {
-           document.write("<h3>Não há itens no estoque</h3>")
+           containerProductTitle.insertAdjacentHTML(
+            'beforeEnd',
+            `<span class="text-primary">Não há itens no estoque</span>`
+            );
       } else {
           produtos = JSON.parse(produtos);
           produtos.forEach(produto => {
-              document.write("<ul>");
-              document.write("<li>Nome do produto: "+produto.nome+"</li>");
-              document.write("<li>Código do produto: "+produto.codigo+"</li>");
-              document.write("<li>Quantidade no estoque: "+produto.quantidade+"</li>");
-              document.write("</ul>");
+            containerProduct.insertAdjacentHTML(
+              'beforeEnd',
+              `<li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <h6 class="my-0">Nome do produto: ${produto.nome}</h6>
+                  <small class="text-muted">Cod. Product: ${produto.codigo}</small>
+                </div>
+                <span class="text-muted">${produto.quantidade}</span>
+              </li>`
+              );
           });
       }
   } else {
