@@ -38,7 +38,3 @@ Criação de um sistema e-commerce para inventário de produtos e dados de clien
 Button de cadastro - Button de estoque - Button limpar campos.
 
 
-#### Link do projeto:
-
-[Link o projeto!](https://gestao-cadastros-hc2.netlify.app/)
-
